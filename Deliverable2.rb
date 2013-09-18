@@ -51,7 +51,6 @@ class NoSuchStrategyError < StandardError; end
 def rps_game_winner(game)
 	raise WrongNumberOfPlayersError unless game.length == 2
 	viable = ["P","S","R"]
-	
 	#Help from Tony on this if statment
 	if (viable.include?(game[0][1].upcase) && viable.include?(game[1][1].upcase))
 		if (game[0][1] + game[1][1] =~ /SS|PP|RR|SP|RS|PR/i)
@@ -66,24 +65,15 @@ end
 
 def rps_tournament(tourney)
 	if tourney[0][0].is_a? String
-		return rps_game_winner(tourney)
+		rps_game_winner(tourney)
 	end
 	
-	return rps_game_winner([rps_tournament(tourney[0]), 
-					rps_tournament(tourney[1]))
+	rps_game_winner([rps_tournament(tourney[0]), 
+					rps_tournament(tourney[1])])
 end
 
-input = [
-    [
-        [ ["Armando", "P"], ["Dave", "S"] ],
-        [ ["Richard", "R"],  ["Michael", "S"] ],
-    ],
-    [
-        [ ["Allen", "S"], ["Omer", "P"] ],
-        [ ["David E.", "R"], ["Richard X.", "P"] ]
-    ]
-]
-puts rps_game_winner(input)
+input = [ [ [ ["Armando", "P"], ["Dave", "S"] ], [ ["Richard", "R"],  ["Michael", "S"] ],],[ [ ["Allen", "S"], ["Omer", "P"] ], [ ["David E.", "R"], ["Richard X.", "P"] ] ] ]
+puts rps_tournament(input)
 
 #Credit to user zippie on stack overflow:
 #http://stackoverflow.com/questions/15855480/how-to-sort-array-of-words-into-arrays-of-anagrams-in-ruby
