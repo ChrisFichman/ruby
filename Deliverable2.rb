@@ -64,12 +64,12 @@ def rps_game_winner(game)
 end	
 
 def rps_tournament(tourney)
-	if tourney[0][0].is_a? String
+	if tourney[0][1].is_a? String
 		rps_game_winner(tourney)
-	end
-	
-	rps_game_winner([rps_tournament(tourney[0]), 
+	else
+		rps_game_winner([rps_tournament(tourney[0]), 
 					rps_tournament(tourney[1])])
+	end
 end
 
 input = [ [ [ ["Armando", "P"], ["Dave", "S"] ], [ ["Richard", "R"],  ["Michael", "S"] ],],[ [ ["Allen", "S"], ["Omer", "P"] ], [ ["David E.", "R"], ["Richard X.", "P"] ] ] ]
